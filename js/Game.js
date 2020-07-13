@@ -2,12 +2,12 @@
 class Game {
     constructor() {
       this.missed = 0;
-      this.phrases = ['do or do not, there is no try',
+      this.phrases = ['when there is a will there is a way',
                       'just do it',
                       'mind over matter',
                       'flow like water',
                       'what goes around comes around'];
-      this.phraseClass = '';
+      this.activePhrase = '';
     }
 
     // gets random phrase
@@ -21,9 +21,9 @@ class Game {
     // if wrong then stores into a targetLetter variable to active removeLife()
     // which will be sent to class wrong and show the letter is wrong, therefore lose a heart
     handleInteraction(e, letter) {
-        const letterIsInPhrase = this.phraseClass.checkLetter(letter);
+        const letterIsInPhrase = this.activePhrase.checkLetter(letter);
         if (letterIsInPhrase) {
-            this.phraseClass.showMatchedLetter(letter);
+            this.activePhrase.showMatchedLetter(letter);
             this.checkForWin();
         } else {
             if (e) {
@@ -72,7 +72,7 @@ class Game {
     // check if the phrase matches, then display win message
     checkForWin() {   
         const showCount = $('.show').length;
-        const letterCount = this.phraseClass.phrase.length;
+        const letterCount = this.activePhrase.phrase.length;
         if (letterCount === showCount) {
             this.gameOver(`You won! The phrase was <i>"${this.chosenPhrase}"</i>`);
         } 
@@ -94,8 +94,8 @@ class Game {
             return false;
         }        
         const phrase = this.getRandomPhrase();
-        this.phraseClass = new Phrase(phrase);
-        this.phraseClass.addPhraseToDisplay();
+        this.activePhrase = new Phrase(phrase);
+        this.activePhrase.addPhraseToDisplay();
         $('#overlay').fadeOut(1000);
     }
 }
