@@ -19,6 +19,10 @@ function markButton(e) {
         clickLetter.classList.add('chosen');
         game.handleInteraction(e, letter);
 
+    } else if(e.target.tagName === 'DIV') { 
+        
+        return null; 
+    
     } else if (e) {
         const input = e.key.toLowerCase();
         const letterReg = /[a-z,]/g;
